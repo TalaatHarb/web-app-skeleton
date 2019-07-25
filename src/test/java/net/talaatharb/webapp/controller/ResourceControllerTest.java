@@ -29,6 +29,7 @@ public class ResourceControllerTest {
 
 	private static final String DELETE_RESOURCE = "/2";
 	private static final String GET_UPDATE_RESOURCE = "/1";
+	private static final String NON_EXISTING = "/1000";
 	private static final String RESOURCE_URL = "/resources";
 
 	private ResourceDtoV1 createdResource;
@@ -63,6 +64,14 @@ public class ResourceControllerTest {
 	}
 
 	@Test
+	public void testCreateResourceInvalidData() throws Exception {
+		ResultActions result = mvc.perform(MockMvcRequestBuilders.post(RESOURCE_URL)
+				.contentType(MediaType.APPLICATION_JSON_UTF8).content(objectMapper.writeValueAsString(null)));
+
+		result.andExpect(MockMvcResultMatchers.status().isBadRequest()).andDo(MockMvcResultHandlers.print());
+	}
+
+	@Test
 	public void testDeleteResource() throws Exception {
 		final ResultActions result = mvc.perform(MockMvcRequestBuilders.delete(RESOURCE_URL + DELETE_RESOURCE));
 
@@ -84,12 +93,27 @@ public class ResourceControllerTest {
 	}
 
 	@Test
+	public void testGetResourceNonExisting() throws Exception {
+		final ResultActions result = mvc.perform(MockMvcRequestBuilders.get(RESOURCE_URL + NON_EXISTING));
+
+		result.andExpect(MockMvcResultMatchers.status().isNotFound()).andDo(MockMvcResultHandlers.print());
+	}
+
+	@Test
 	public void testUpdateResource() throws Exception {
 		final ResultActions result = mvc.perform(MockMvcRequestBuilders.put(RESOURCE_URL + GET_UPDATE_RESOURCE)
 				.contentType(MediaType.APPLICATION_JSON_UTF8)
 				.content(objectMapper.writeValueAsString(updatedResource)));
 
 		result.andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print());
+	}
+
+	@Test
+	public void testUpdateResourceInvalidData() throws Exception {
+		final ResultActions result = mvc.perform(MockMvcRequestBuilders.put(RESOURCE_URL + GET_UPDATE_RESOURCE)
+				.contentType(MediaType.APPLICATION_JSON_UTF8).content(objectMapper.writeValueAsString(null)));
+
+		result.andExpect(MockMvcResultMatchers.status().isBadRequest()).andDo(MockMvcResultHandlers.print());
 	}
 
 }

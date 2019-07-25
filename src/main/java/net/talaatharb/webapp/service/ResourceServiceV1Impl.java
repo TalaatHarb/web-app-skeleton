@@ -54,7 +54,7 @@ public class ResourceServiceV1Impl implements ResourceServiceV1 {
 
 	@Override
 	public ResourceDtoV1 updateResource(final Long id, final ResourceDtoV1 resourceDto) {
-		if (resourceDto != null && id != null) {
+		if (resourceDto != null) {
 			resourceDto.setId(id);
 			final Resource resource = resourceRepository.save(resourceMapperV1.toEntity(resourceDto));
 			return resourceMapperV1.toDto(resource);
