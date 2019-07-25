@@ -2,11 +2,13 @@ package net.talaatharb.webapp.controller;
 
 import java.util.List;
 
-import lombok.NoArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import net.talaatharb.webapp.bootstrap.Bootstrap;
 import net.talaatharb.webapp.domain.Resource;
 
-@NoArgsConstructor
+@RestController
 public class ResourceController {
 
 	/**
@@ -14,6 +16,7 @@ public class ResourceController {
 	 * 
 	 * @return List of all resources
 	 */
+	@GetMapping(path = "/resources")
 	public List<Resource> getAll() {
 		return Bootstrap.getInstance().getResourceRepository().findAll();
 	}

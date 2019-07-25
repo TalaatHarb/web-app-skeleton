@@ -1,18 +1,16 @@
 package net.talaatharb.webapp;
 
-import net.talaatharb.webapp.bootstrap.Bootstrap;
-import net.talaatharb.webapp.controller.ResourceController;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import net.talaatharb.webapp.bootstrap.Bootstrap;
+
+@SpringBootApplication
 public class Webapp {
 
 	public static void main(String[] args) {
 		Bootstrap.getInstance().run();
-		
-		System.out.println("Hello, World!");
-
-		final ResourceController controller = new ResourceController();
-
-		System.out.println(controller.getAll());
+		SpringApplication.run(Webapp.class, args);
 	}
 
 }
