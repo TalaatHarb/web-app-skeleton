@@ -1,19 +1,18 @@
 package net.talaatharb.webapp;
 
-import java.util.List;
-
 import net.talaatharb.webapp.bootstrap.Bootstrap;
-import net.talaatharb.webapp.domain.Resource;
+import net.talaatharb.webapp.controller.ResourceController;
 
 public class Webapp {
 
 	public static void main(String[] args) {
 		Bootstrap.getInstance().run();
+		
 		System.out.println("Hello, World!");
 
-		List<Resource> resources = Bootstrap.getInstance().getResourceRepository().findAll();
+		final ResourceController controller = new ResourceController();
 
-		System.out.println(resources);
+		System.out.println(controller.getAll());
 	}
 
 }
