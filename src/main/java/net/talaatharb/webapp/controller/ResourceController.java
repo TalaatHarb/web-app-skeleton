@@ -1,7 +1,6 @@
 package net.talaatharb.webapp.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,21 +12,15 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
 import net.talaatharb.webapp.controller.dto.ResourceDtoV1;
-import net.talaatharb.webapp.controller.mapper.EntityMapper;
-import net.talaatharb.webapp.domain.Resource;
-import net.talaatharb.webapp.repository.ResourceRepository;
+import net.talaatharb.webapp.service.ResourceServiceV1;
 
 @RestController
 public class ResourceController {
 
 	@Autowired
-	private EntityMapper<Resource, ResourceDtoV1> resourceMapperV1;
-
-	@Autowired
-	private ResourceRepository resourceRepository;
+	private ResourceServiceV1 resourceServiceV1;
 
 	/**
 	 * Method to create a resource
@@ -38,12 +31,7 @@ public class ResourceController {
 	@PostMapping(path = "/resources")
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResourceDtoV1 createResource(@RequestBody final ResourceDtoV1 resourceDto) {
-		if (resourceDto != null && resourceDto.getId() == null) {
-			final Resource resource = resourceRepository.save(resourceMapperV1.toEntity(resourceDto));
-			return resourceMapperV1.toDto(resource);
-		} else {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "You have to have a valid resource with no ID");
-		}
+		return resourceServiceV1.createResource(resourceDto);
 	}
 
 	/**
@@ -54,7 +42,7 @@ public class ResourceController {
 	@DeleteMapping(path = "/resources/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deleteResource(@PathVariable final Long id) {
-		resourceRepository.deleteById(id);
+		resourceServiceV1.deleteResource(id);
 	}
 
 	/**
@@ -64,7 +52,7 @@ public class ResourceController {
 	 */
 	@GetMapping(path = "/resources")
 	public List<ResourceDtoV1> getAllResources() {
-		return resourceMapperV1.toDto(resourceRepository.findAll());
+		return resourceServiceV1.getAllResources();
 	}
 
 	/**
@@ -75,12 +63,7 @@ public class ResourceController {
 	 */
 	@GetMapping(path = "/resources/{id}")
 	public ResourceDtoV1 getResource(@PathVariable final Long id) {
-		final Optional<Resource> possibleResource = resourceRepository.findById(id);
-		if (possibleResource.isPresent()) {
-			return resourceMapperV1.toDto(possibleResource.get());
-		} else {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
-		}
+		return resourceServiceV1.getResource(id);
 	}
 
 	/**
@@ -92,13 +75,7 @@ public class ResourceController {
 	 */
 	@PutMapping(path = "/resources/{id}")
 	public ResourceDtoV1 updateResource(@PathVariable final Long id, @RequestBody final ResourceDtoV1 resourceDto) {
-		if (resourceDto != null && id != null) {
-			resourceDto.setId(id);
-			final Resource resource = resourceRepository.save(resourceMapperV1.toEntity(resourceDto));
-			return resourceMapperV1.toDto(resource);
-		} else {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "You have to have a valid resource");
-		}
+		return resourceServiceV1.updateResource(id, resourceDto);
 	}
 
 }
