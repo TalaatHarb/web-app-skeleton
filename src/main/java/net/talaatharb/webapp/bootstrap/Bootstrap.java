@@ -18,8 +18,6 @@ public class Bootstrap implements CommandLineRunner {
 	@Override
 	public void run(String... args) {
 
-		System.out.println("Bootstrap");
-
 		// Create some resources
 		final Resource r1 = new Resource();
 		r1.setData(Arrays.asList("One", "Two", "Three"));

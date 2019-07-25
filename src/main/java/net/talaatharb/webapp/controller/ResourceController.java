@@ -10,11 +10,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import net.talaatharb.webapp.controller.dto.ResourceDtoV1;
+import net.talaatharb.webapp.controller.mapper.EntityMapper;
 import net.talaatharb.webapp.domain.Resource;
 import net.talaatharb.webapp.repository.ResourceRepository;
 
 @RestController
 public class ResourceController {
+
+	@Autowired
+	private EntityMapper<Resource, ResourceDtoV1> resourceMapperV1;
 
 	@Autowired
 	private ResourceRepository resourceRepository;
@@ -25,8 +30,8 @@ public class ResourceController {
 	 * @return List of all resources
 	 */
 	@GetMapping(path = "/resources")
-	public List<Resource> getAllResources() {
-		return resourceRepository.findAll();
+	public List<ResourceDtoV1> getAllResources() {
+		return resourceMapperV1.toDto(resourceRepository.findAll());
 	}
 
 	/**
@@ -36,10 +41,10 @@ public class ResourceController {
 	 * @return The resource to get if it is available
 	 */
 	@GetMapping(path = "/resources/{id}")
-	public Resource getResource(@PathVariable final Long id) {
+	public ResourceDtoV1 getResource(@PathVariable final Long id) {
 		final Optional<Resource> possibleResource = resourceRepository.findById(id);
 		if (possibleResource.isPresent()) {
-			return possibleResource.get();
+			return resourceMapperV1.toDto(possibleResource.get());
 		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
 		}
