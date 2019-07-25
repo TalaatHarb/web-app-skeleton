@@ -17,12 +17,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import net.talaatharb.webapp.controller.dto.ResourceDtoV1;
 import net.talaatharb.webapp.controller.dto.Views;
 import net.talaatharb.webapp.service.ResourceServiceV1;
 
 @RestController
 @RequestMapping(path = "/resources")
+@Api(tags = { "Resource" })
 public class ResourceController {
 
 	@Autowired
@@ -37,6 +40,7 @@ public class ResourceController {
 	@PostMapping(path = "", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
 	@JsonView(Views.Detail.class)
+	@ApiOperation(value = "Create a resource")
 	public ResourceDtoV1 createResource(@RequestBody final ResourceDtoV1 resourceDto) {
 		return resourceServiceV1.createResource(resourceDto);
 	}
@@ -48,6 +52,7 @@ public class ResourceController {
 	 */
 	@DeleteMapping(path = "/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@ApiOperation(value = "Delete a resource")
 	public void deleteResource(@PathVariable final Long id) {
 		resourceServiceV1.deleteResource(id);
 	}
@@ -59,6 +64,7 @@ public class ResourceController {
 	 */
 	@GetMapping(path = "", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@JsonView(Views.Basic.class)
+	@ApiOperation(value = "Get all resources")
 	public List<ResourceDtoV1> getAllResources() {
 		return resourceServiceV1.getAllResources();
 	}
@@ -71,6 +77,7 @@ public class ResourceController {
 	 */
 	@GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@JsonView(Views.Detail.class)
+	@ApiOperation(value = "Get a resource")
 	public ResourceDtoV1 getResource(@PathVariable final Long id) {
 		return resourceServiceV1.getResource(id);
 	}
@@ -84,6 +91,7 @@ public class ResourceController {
 	 */
 	@PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@JsonView(Views.Detail.class)
+	@ApiOperation(value = "Upadte a resource")
 	public ResourceDtoV1 updateResource(@PathVariable final Long id, @RequestBody final ResourceDtoV1 resourceDto) {
 		return resourceServiceV1.updateResource(id, resourceDto);
 	}

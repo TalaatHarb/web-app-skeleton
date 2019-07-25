@@ -4,9 +4,11 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 @Data
+@ApiModel(value = "Resource", description = "Resource DTO")
 public class ResourceDtoV1 {
 
 	/**
