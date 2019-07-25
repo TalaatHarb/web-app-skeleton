@@ -1,5 +1,6 @@
 package net.talaatharb.webapp.controller.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonView;
@@ -19,7 +20,7 @@ public class ResourceDtoV1 {
 	 * List of strings to represent the data of this resource
 	 */
 	@JsonView(Views.Detail.class)
-	private List<String> data;
+	private List<String> data = new ArrayList<>();
 
 	/**
 	 * ID of the resource

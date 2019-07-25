@@ -1,5 +1,6 @@
 package net.talaatharb.webapp.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.ElementCollection;
@@ -22,7 +23,7 @@ public class Resource {
 	 * List of strings to represent the data of this resource
 	 */
 	@ElementCollection
-	private List<String> data;
+	private List<String> data = new ArrayList<>();
 
 	/**
 	 * ID of the resource
