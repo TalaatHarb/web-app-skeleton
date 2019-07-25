@@ -38,8 +38,12 @@ public class ResourceServiceV1Impl implements ResourceServiceV1 {
 	}
 
 	@Override
-	public List<ResourceDtoV1> getAllResources() {
-		return resourceMapperV1.toDto(resourceRepository.findAll());
+	public List<ResourceDtoV1> getAllResources(final String name) {
+		if (name == null) {
+			return resourceMapperV1.toDto(resourceRepository.findAll());
+		} else {
+			return resourceMapperV1.toDto(resourceRepository.findAllByNameContainingIgnoreCase(name));
+		}
 	}
 
 	@Override

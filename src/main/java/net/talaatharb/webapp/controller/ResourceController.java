@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -60,13 +61,14 @@ public class ResourceController {
 	/**
 	 * Method to get all resources
 	 * 
+	 * @param name Part of the name to search for
 	 * @return List of all resources
 	 */
 	@GetMapping(path = "", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@JsonView(Views.Basic.class)
 	@ApiOperation(value = "Get all resources")
-	public List<ResourceDtoV1> getAllResources() {
-		return resourceServiceV1.getAllResources();
+	public List<ResourceDtoV1> getAllResources(@RequestParam(required = false) final String name) {
+		return resourceServiceV1.getAllResources(name);
 	}
 
 	/**

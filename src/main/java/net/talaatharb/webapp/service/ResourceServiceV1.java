@@ -23,9 +23,11 @@ public interface ResourceServiceV1 {
 	/**
 	 * Method to get all resources
 	 * 
+	 * @param name
+	 * 
 	 * @return List of all resources
 	 */
-	public List<ResourceDtoV1> getAllResources();
+	public List<ResourceDtoV1> getAllResources(final String name);
 
 	/**
 	 * Method to get a resource given its ID
