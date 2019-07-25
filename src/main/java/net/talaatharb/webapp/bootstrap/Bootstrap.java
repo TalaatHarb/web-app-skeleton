@@ -2,39 +2,21 @@ package net.talaatharb.webapp.bootstrap;
 
 import java.util.Arrays;
 
-import lombok.Getter;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
+
 import net.talaatharb.webapp.domain.Resource;
 import net.talaatharb.webapp.repository.ResourceRepository;
 import net.talaatharb.webapp.repository.ResourceRepositoryImpl;
 
-@Getter
-public class Bootstrap implements Runnable {
+@Component
+public class Bootstrap implements CommandLineRunner {
 
-	/**
-	 * Singleton instance
-	 */
-	private static final Bootstrap INSTANCE = new Bootstrap();
-
-	/**
-	 * Get the singleton instance of this class
-	 * 
-	 * @return Singleton instance
-	 */
-	public static final synchronized Bootstrap getInstance() {
-		return INSTANCE;
-	}
-
-	private final ResourceRepository resourceRepository;
-
-	/**
-	 * Private constructor
-	 */
-	private Bootstrap() {
-		resourceRepository = new ResourceRepositoryImpl();
-	}
+	private final ResourceRepository resourceRepository = ResourceRepositoryImpl.getInstance();
 
 	@Override
-	public void run() {
+	public void run(String... args) {
+
 		System.out.println("Bootstrap");
 
 		// Create some resources
@@ -50,5 +32,4 @@ public class Bootstrap implements Runnable {
 
 		resourceRepository.save(r2);
 	}
-
 }

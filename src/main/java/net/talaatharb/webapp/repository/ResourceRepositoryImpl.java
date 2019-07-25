@@ -8,6 +8,12 @@ import net.talaatharb.webapp.domain.Resource;
 
 public class ResourceRepositoryImpl implements ResourceRepository {
 
+	private static final ResourceRepository INSTANCE = new ResourceRepositoryImpl();
+
+	public static final synchronized ResourceRepository getInstance() {
+		return INSTANCE;
+	}
+
 	/**
 	 * Resources stored as a list
 	 */
@@ -16,7 +22,7 @@ public class ResourceRepositoryImpl implements ResourceRepository {
 	/**
 	 * No arguments constructor for the repository
 	 */
-	public ResourceRepositoryImpl() {
+	private ResourceRepositoryImpl() {
 		resources = new ArrayList<>();
 	}
 
