@@ -2,17 +2,18 @@ package net.talaatharb.webapp.bootstrap;
 
 import java.util.Arrays;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import net.talaatharb.webapp.domain.Resource;
 import net.talaatharb.webapp.repository.ResourceRepository;
-import net.talaatharb.webapp.repository.ResourceRepositoryImpl;
 
 @Component
 public class Bootstrap implements CommandLineRunner {
 
-	private final ResourceRepository resourceRepository = ResourceRepositoryImpl.getInstance();
+	@Autowired
+	private ResourceRepository resourceRepository;
 
 	@Override
 	public void run(String... args) {
