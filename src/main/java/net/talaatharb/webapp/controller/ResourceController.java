@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,7 +29,7 @@ public class ResourceController {
 	 * @param resourceDto The resource to create
 	 * @return The created resource
 	 */
-	@PostMapping(path = "/resources")
+	@PostMapping(path = "/resources", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResourceDtoV1 createResource(@RequestBody final ResourceDtoV1 resourceDto) {
 		return resourceServiceV1.createResource(resourceDto);
@@ -50,7 +51,7 @@ public class ResourceController {
 	 * 
 	 * @return List of all resources
 	 */
-	@GetMapping(path = "/resources")
+	@GetMapping(path = "/resources", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public List<ResourceDtoV1> getAllResources() {
 		return resourceServiceV1.getAllResources();
 	}
@@ -61,7 +62,7 @@ public class ResourceController {
 	 * @param ID of the resource to get
 	 * @return The resource to get if it is available
 	 */
-	@GetMapping(path = "/resources/{id}")
+	@GetMapping(path = "/resources/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResourceDtoV1 getResource(@PathVariable final Long id) {
 		return resourceServiceV1.getResource(id);
 	}
@@ -73,7 +74,7 @@ public class ResourceController {
 	 * @param resourceDto The resource to update
 	 * @return The updated resource
 	 */
-	@PutMapping(path = "/resources/{id}")
+	@PutMapping(path = "/resources/{id}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResourceDtoV1 updateResource(@PathVariable final Long id, @RequestBody final ResourceDtoV1 resourceDto) {
 		return resourceServiceV1.updateResource(id, resourceDto);
 	}

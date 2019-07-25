@@ -20,8 +20,8 @@ public class Bootstrap implements CommandLineRunner {
 
 		// Create some resources
 		final Resource r1 = new Resource();
-		r1.setData(Arrays.asList("One", "Two", "Three"));
-		r1.setName("First three");
+		r1.setData(Arrays.asList("one", "two", "three"));
+		r1.setName("first three");
 
 		resourceRepository.save(r1);
 
