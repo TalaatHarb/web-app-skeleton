@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -23,6 +25,22 @@ public class ResourceController {
 
 	@Autowired
 	private ResourceRepository resourceRepository;
+
+	/**
+	 * Method to create a resource
+	 * 
+	 * @param resourceDto the resource to create
+	 * @return The created resource
+	 */
+	@PostMapping(path = "/resources")
+	public ResourceDtoV1 createResource(@RequestBody final ResourceDtoV1 resourceDto) {
+		if (resourceDto != null && resourceDto.getId() == null) {
+			final Resource resource = resourceRepository.save(resourceMapperV1.toEntity(resourceDto));
+			return resourceMapperV1.toDto(resource);
+		} else {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "You have to have a valid resource with no ID");
+		}
+	}
 
 	/**
 	 * Method to get all resources
