@@ -11,13 +11,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import net.talaatharb.webapp.controller.dto.ResourceDtoV1;
+import net.talaatharb.webapp.controller.dto.Views;
 import net.talaatharb.webapp.service.ResourceServiceV1;
 
 @RestController
+@RequestMapping(path = "/resources")
 public class ResourceController {
 
 	@Autowired
@@ -29,8 +34,9 @@ public class ResourceController {
 	 * @param resourceDto The resource to create
 	 * @return The created resource
 	 */
-	@PostMapping(path = "/resources", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@PostMapping(path = "", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
+	@JsonView(Views.Detail.class)
 	public ResourceDtoV1 createResource(@RequestBody final ResourceDtoV1 resourceDto) {
 		return resourceServiceV1.createResource(resourceDto);
 	}
@@ -40,7 +46,7 @@ public class ResourceController {
 	 * 
 	 * @param id The ID of the resource to be deleted
 	 */
-	@DeleteMapping(path = "/resources/{id}")
+	@DeleteMapping(path = "/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deleteResource(@PathVariable final Long id) {
 		resourceServiceV1.deleteResource(id);
@@ -51,7 +57,8 @@ public class ResourceController {
 	 * 
 	 * @return List of all resources
 	 */
-	@GetMapping(path = "/resources", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@GetMapping(path = "", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@JsonView(Views.Basic.class)
 	public List<ResourceDtoV1> getAllResources() {
 		return resourceServiceV1.getAllResources();
 	}
@@ -62,7 +69,8 @@ public class ResourceController {
 	 * @param ID of the resource to get
 	 * @return The resource to get if it is available
 	 */
-	@GetMapping(path = "/resources/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@JsonView(Views.Detail.class)
 	public ResourceDtoV1 getResource(@PathVariable final Long id) {
 		return resourceServiceV1.getResource(id);
 	}
@@ -74,7 +82,8 @@ public class ResourceController {
 	 * @param resourceDto The resource to update
 	 * @return The updated resource
 	 */
-	@PutMapping(path = "/resources/{id}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@JsonView(Views.Detail.class)
 	public ResourceDtoV1 updateResource(@PathVariable final Long id, @RequestBody final ResourceDtoV1 resourceDto) {
 		return resourceServiceV1.updateResource(id, resourceDto);
 	}
