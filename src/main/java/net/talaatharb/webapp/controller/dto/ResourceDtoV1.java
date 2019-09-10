@@ -10,6 +10,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Resource data transfer object
+ * @author mharb
+ *
+ */
 @Getter
 @Setter
 @NoArgsConstructor

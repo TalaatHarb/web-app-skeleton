@@ -4,6 +4,11 @@ import java.util.List;
 
 import net.talaatharb.webapp.controller.dto.ResourceDtoV1;
 
+/**
+ * An interface for performing resource related tasks in the back-end
+ * @author mharb
+ *
+ */
 public interface ResourceServiceV1 {
 	/**
 	 * Method to create a resource
@@ -32,7 +37,7 @@ public interface ResourceServiceV1 {
 	/**
 	 * Method to get a resource given its ID
 	 * 
-	 * @param ID of the resource to get
+	 * @param id ID of the resource to get
 	 * @return The resource to get if it is available
 	 */
 	public ResourceDtoV1 getResource(final Long id);

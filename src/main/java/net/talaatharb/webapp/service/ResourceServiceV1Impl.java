@@ -13,6 +13,11 @@ import net.talaatharb.webapp.controller.mapper.EntityMapper;
 import net.talaatharb.webapp.domain.Resource;
 import net.talaatharb.webapp.repository.ResourceRepository;
 
+/**
+ * Implementation of the ResourceServiceV1 interface
+ * @author mharb
+ *
+ */
 @Service
 public class ResourceServiceV1Impl implements ResourceServiceV1 {
 

@@ -5,6 +5,11 @@ import org.springframework.stereotype.Component;
 import net.talaatharb.webapp.controller.dto.ResourceDtoV1;
 import net.talaatharb.webapp.domain.Resource;
 
+/**
+ * An implementation of a mapper for resources
+ * @author mharb
+ *
+ */
 @Component
 public class ResourceMapperV1 implements EntityMapper<Resource, ResourceDtoV1> {
 

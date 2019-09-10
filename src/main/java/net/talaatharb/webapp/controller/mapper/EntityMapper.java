@@ -3,6 +3,13 @@ package net.talaatharb.webapp.controller.mapper;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * EntityMapper interface that a mapper implementation between DTOs and entities will inherit
+ * @author mharb
+ *
+ * @param <E> The entity object
+ * @param <D> The DTO object
+ */
 public interface EntityMapper<E, D> {
 
 	/**

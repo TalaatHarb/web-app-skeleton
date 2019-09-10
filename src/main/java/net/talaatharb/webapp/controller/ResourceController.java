@@ -24,6 +24,11 @@ import net.talaatharb.webapp.controller.dto.ResourceDtoV1;
 import net.talaatharb.webapp.controller.dto.Views;
 import net.talaatharb.webapp.service.ResourceServiceV1;
 
+/**
+ * Resource controller
+ * @author mharb
+ *
+ */
 @RestController
 @RequestMapping(path = "/resources")
 @Api(tags = { "Resource" })
@@ -73,8 +78,7 @@ public class ResourceController {
 
 	/**
 	 * Method to get a resource given its ID
-	 * 
-	 * @param ID of the resource to get
+	 * @param id ID of the resource to get
 	 * @return The resource to get if it is available
 	 */
 	@GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

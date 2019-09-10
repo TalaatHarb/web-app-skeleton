@@ -25,6 +25,11 @@ import net.talaatharb.webapp.controller.dto.ResourceDtoV1;
 import net.talaatharb.webapp.domain.Resource;
 import net.talaatharb.webapp.repository.ResourceRepository;
 
+/**
+ * Tests for the resource controller class
+ * @author mharb
+ *
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
@@ -50,6 +55,9 @@ public class ResourceControllerTest {
 
 	private ResourceDtoV1 updatedResource;
 
+	/**
+	 * Setup method for the tests
+	 */
 	@Before
 	public void setup() {
 		// Create some resources and save them in the database
@@ -76,6 +84,10 @@ public class ResourceControllerTest {
 
 	}
 
+	/**
+	 * Testing the creation of resources
+	 * @throws Exception It throws exception in case of test unable to perform request
+	 */
 	@Test
 	public void testCreateResource() throws Exception {
 		final ResultActions result = mvc
@@ -85,6 +97,10 @@ public class ResourceControllerTest {
 		result.andExpect(MockMvcResultMatchers.status().isCreated()).andDo(MockMvcResultHandlers.print());
 	}
 
+	/**
+	 * Testing the creation of a resource in case of invalid data
+	 * @throws Exception It throws exception in case of test unable to perform request
+	 */
 	@Test
 	public void testCreateResourceInvalidData() throws Exception {
 		ResultActions result = mvc.perform(MockMvcRequestBuilders.post(RESOURCE_URL)
@@ -93,6 +109,10 @@ public class ResourceControllerTest {
 		result.andExpect(MockMvcResultMatchers.status().isBadRequest()).andDo(MockMvcResultHandlers.print());
 	}
 
+	/**
+	 * Testing deletion of a resource
+	 * @throws Exception It throws exception in case of test unable to perform request
+	 */
 	@Test
 	public void testDeleteResource() throws Exception {
 		final ResultActions result = mvc.perform(MockMvcRequestBuilders.delete(RESOURCE_URL + DELETE_RESOURCE));
@@ -100,6 +120,10 @@ public class ResourceControllerTest {
 		result.andExpect(MockMvcResultMatchers.status().isNoContent()).andDo(MockMvcResultHandlers.print());
 	}
 
+	/**
+	 * Testing getting a list of all the resources
+	 * @throws Exception It throws exception in case of test unable to perform request
+	 */
 	@Test
 	public void testGetAllResources() throws Exception {
 		final ResultActions result = mvc.perform(MockMvcRequestBuilders.get(RESOURCE_URL));
@@ -109,6 +133,10 @@ public class ResourceControllerTest {
 				.andDo(MockMvcResultHandlers.print());
 	}
 
+	/**
+	 * Testing getting all the resources with parameter filters
+	 * @throws Exception It throws exception in case of test unable to perform request
+	 */
 	@Test
 	public void testGetAllResourcesWithParameters() throws Exception {
 		final ResultActions result = mvc.perform(MockMvcRequestBuilders.get(RESOURCE_URL).param("name", SEARCH_TERM));
@@ -118,6 +146,10 @@ public class ResourceControllerTest {
 				.andDo(MockMvcResultHandlers.print());
 	}
 
+	/**
+	 * Testing getting a single resource
+	 * @throws Exception It throws exception in case of test unable to perform request
+	 */
 	@Test
 	public void testGetResource() throws Exception {
 		final ResultActions result = mvc.perform(MockMvcRequestBuilders.get(RESOURCE_URL + GET_UPDATE_RESOURCE));
@@ -125,6 +157,10 @@ public class ResourceControllerTest {
 		result.andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print());
 	}
 
+	/**
+	 * Testing getting a non existing resource
+	 * @throws Exception It throws exception in case of test unable to perform request
+	 */
 	@Test
 	public void testGetResourceNonExisting() throws Exception {
 		final ResultActions result = mvc.perform(MockMvcRequestBuilders.get(RESOURCE_URL + NON_EXISTING));
@@ -132,6 +168,10 @@ public class ResourceControllerTest {
 		result.andExpect(MockMvcResultMatchers.status().isNotFound()).andDo(MockMvcResultHandlers.print());
 	}
 
+	/**
+	 * Testing updating an existing resource
+	 * @throws Exception It throws exception in case of test unable to perform request
+	 */
 	@Test
 	public void testUpdateResource() throws Exception {
 		final ResultActions result = mvc.perform(MockMvcRequestBuilders.put(RESOURCE_URL + GET_UPDATE_RESOURCE)
@@ -141,6 +181,10 @@ public class ResourceControllerTest {
 		result.andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print());
 	}
 
+	/**
+	 * Testing updating a resource with invalid data
+	 * @throws Exception It throws exception in case of test unable to perform request
+	 */
 	@Test
 	public void testUpdateResourceInvalidData() throws Exception {
 		final ResultActions result = mvc.perform(MockMvcRequestBuilders.put(RESOURCE_URL + GET_UPDATE_RESOURCE)

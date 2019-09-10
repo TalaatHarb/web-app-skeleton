@@ -12,6 +12,11 @@ import org.junit.Test;
 import net.talaatharb.webapp.controller.dto.ResourceDtoV1;
 import net.talaatharb.webapp.domain.Resource;
 
+/**
+ * Tests for the resource mapper
+ * @author mharb
+ *
+ */
 public class ResourceMapperV1Test {
 
 	private static final Random RANDOM = new Random();
@@ -55,6 +60,9 @@ public class ResourceMapperV1Test {
 		assertThat(dto.getData()).hasSameElementsAs(entity.getData());
 	}
 
+	/**
+	 * Setup method for resource mapper
+	 */
 	@Before
 	public void setup() {
 		resourceMapperV1 = new ResourceMapperV1();
@@ -73,12 +81,18 @@ public class ResourceMapperV1Test {
 		dtos = Arrays.asList(dto, new ResourceDtoV1());
 	}
 
+	/**
+	 * Testing the 'toDto' method of a resource mapper, for converting single DTO
+	 */
 	@Test
 	public void testToDto() {
 		final ResourceDtoV1 resultDto = resourceMapperV1.toDto(entity);
 		assertEqualEntityDto(entity, resultDto);
 	}
 
+	/**
+	 * Testing the 'toDto' method of a resource mapper, for converting a list of DTOs
+	 */
 	@Test
 	public void testToDtoList() {
 		final List<ResourceDtoV1> resultDtos = resourceMapperV1.toDto(entities);
@@ -87,12 +101,18 @@ public class ResourceMapperV1Test {
 		}
 	}
 
+	/**
+	 * Testing the 'toEntity' method of a resource mapper, for converting single entity
+	 */
 	@Test
 	public void testToEntity() {
 		final Resource resultEntity = resourceMapperV1.toEntity(dto);
 		assertEqualEntityDto(resultEntity, dto);
 	}
 
+	/**
+	 * Testing the 'toEntity' method of a resource mapper, for converting a list of entities
+	 */
 	@Test
 	public void testToEntityList() {
 		final List<Resource> resultEntities = resourceMapperV1.toEnity(dtos);

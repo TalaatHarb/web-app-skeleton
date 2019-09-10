@@ -1,5 +1,10 @@
 package net.talaatharb.webapp.controller.dto;
 
+/**
+ * A class for handling details of displaying JSON objects
+ * @author mharb
+ *
+ */
 public class Views {
 
 	/**
