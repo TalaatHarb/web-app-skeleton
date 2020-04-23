@@ -60,11 +60,22 @@
 	</dependencies>
 	
 	<build>
+		<finalName>web-app-skeleton-${project.version}-runnable</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>2.2.2.RELEASE</version>
+				<version>2.2.4.RELEASE</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<mainClass>net.talaatharb.webapp.WebApp</mainClass>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
